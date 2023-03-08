@@ -16,23 +16,13 @@ import InputLabel from '@mui/material/InputLabel';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import axios from 'axios';
 import * as React from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import SayalaniWelfare from '../SaylaniWelfare/SayalaniWelfare';
-// function Copyright(props) {
-// 	return (
-// 		<Typography variant='body2' color='text.secondary' align='center' {...props}>
-// 			{'Copyright © '}
-// 			<Link color='inherit' href='https://mui.com/'>
-// 				Your Website
-// 			</Link>{' '}
-// 			{new Date().getFullYear()}
-// 			{'.'}
-// 		</Typography>
-// 	);
-// }
+
 const theme = createTheme();
 
 export default function Signup() {
+	const navigate = useNavigate();
 	const [showPassword, setShowPassword] = React.useState(false);
 
 	const handleClickShowPassword = () => setShowPassword((show) => !show);
@@ -42,10 +32,7 @@ export default function Signup() {
 
 	const handleSubmit = async (event) => {
 		event.preventDefault();
-		// eslint-disable-next-line no-unused-vars
-
 		const data = new FormData(event.currentTarget);
-		// console.log(data.get());
 		console.log({
 			fullname: data.get('fullname'),
 			contact: data.get('contact'),
@@ -62,10 +49,11 @@ export default function Signup() {
 				password: data.get('password'),
 			});
 			console.log('response: ', response.data.message);
+			// navigate('/signin');
 
 			// const navigate = useNavigate();
 
-			// navigate('/signin');
+			navigate('/signin');
 		} catch (e) {
 			console.log('Error in api call: ', e);
 		}
@@ -132,6 +120,7 @@ export default function Signup() {
 								<FormControl sx={{ m: 1, width: '40ch' }} variant='standard' required>
 									<InputLabel htmlFor='standard-adornment-password'>Password</InputLabel>
 									<Input
+										autoComplete
 										name='password'
 										type={showPassword ? 'text' : 'password'}
 										endAdornment={
@@ -146,18 +135,6 @@ export default function Signup() {
 										}
 									/>
 								</FormControl>
-								{/* <TextField
-							
-								
-									required
-									fullWidth
-									name='password'
-									label='Password'
-									type='password'
-									id='password'
-									autoComplete='new-password'
-									variant='standard'
-								/> */}
 							</Grid>
 						</Grid>
 
