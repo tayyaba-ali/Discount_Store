@@ -1,0 +1,26 @@
+{
+  "name": "discount_store",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "nodemon server.mjs"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/tayyaba-ali/Discount_Store.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/tayyaba-ali/Discount_Store/issues"
+  },
+  "homepage": "https://github.com/tayyaba-ali/Discount_Store#readme",
+  "dependencies": {
+    "cors": "^2.8.5",
+    "express": "^4.18.2",
+    "nanoid": "^4.0.1"
+  }
+}
