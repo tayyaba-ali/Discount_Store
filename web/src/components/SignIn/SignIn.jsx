@@ -55,7 +55,7 @@ export default function SignIn() {
 		let baseUrl = 'http://localhost:4000';
 		try {
 			let response = await axios.post(
-				`${baseUrl}/signin`,
+				`${baseUrl}/users/signin`,
 				{
 					email: data.get('email'),
 					password: data.get('password'),
@@ -70,8 +70,9 @@ export default function SignIn() {
 			// 	type: 'USER_LOGIN',
 			// 	payload: response.data.profile,
 			// });
-		} catch (e) {
-			console.log('Error in api call: ', e);
+		} catch (error) {
+			console.log(error.response.data);
+			// console.log(e.mesage);
 		}
 	};
 

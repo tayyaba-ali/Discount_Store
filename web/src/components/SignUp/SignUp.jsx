@@ -42,7 +42,7 @@ export default function Signup() {
 
 		let baseUrl = 'http://localhost:4000';
 		try {
-			let response = await axios.post(`${baseUrl}/signup`, {
+			let response = await axios.post(`${baseUrl}/users/signup`, {
 				fullname: data.get('fullname'),
 				contact: data.get('contact'),
 				email: data.get('email'),
@@ -73,7 +73,7 @@ export default function Signup() {
 						flexDirection: 'column',
 						alignItems: 'center',
 					}}>
-					<Box component='form' Validate onSubmit={handleSubmit} sx={{ mt: 3 }}>
+					<Box component='form' validate='true' onSubmit={handleSubmit} sx={{ mt: 3 }}>
 						<Grid container spacing={2}>
 							<Grid item xs={12}>
 								<FormControl sx={{ m: 1, width: '40ch' }} variant='standard' required id='fullname'>
@@ -118,9 +118,8 @@ export default function Signup() {
 							</Grid>
 							<Grid item xs={12}>
 								<FormControl sx={{ m: 1, width: '40ch' }} variant='standard' required>
-									<InputLabel htmlFor='standard-adornment-password'>Password</InputLabel>
+									<InputLabel htmlFor='password'>Password</InputLabel>
 									<Input
-										autoComplete
 										name='password'
 										type={showPassword ? 'text' : 'password'}
 										endAdornment={
