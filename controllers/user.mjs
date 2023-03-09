@@ -1,3 +1,4 @@
+import { stringToHash } from 'bcrypt-inzi';
 import express from 'express';
 import userModel from '../Schema/user.mjs';
 const router = express.Router();
@@ -21,25 +22,36 @@ router.post('/signup', (req, res) => {
 	}
 	console.log('all set required fields');
 
-	userModel
-		.create({
-			fullname: body.fullname,
-			contact: body.contact,
-			email: body.email,
-			password: body.password,
-		})
-		.then((saved) => {
-			console.log(saved);
-
-			res.send({
-				message: 'user added successfully',
+	// check if user already exist // query email user
+	userModel.findOne({ email: body.email }).then((data) => {
+		if (data) {
+			//user already exist
+			console.log('user already exist: ', data);
+			res.status(400).send({ message: 'user already exist,, please try a different email' });
+			return;
+		} else {
+			stringToHash(body.password).then((hashString) => {
+				console.log(hashString);
+				userModel
+					.create({
+						fullname: body.fullname,
+						contact: body.contact,
+						email: body.email.toLowerCase(),
+						password: hashString,
+					})
+					.then((user) => {
+						if (user) {
+							console.log('user saved: ', user);
+							res.status(201).send({ message: 'user is created' });
+						}
+					})
+					.catch((error) => {
+						console.log('db error: ', error);
+						res.status(500).send({ message: 'internal server error' });
+					});
 			});
-		})
-		.catch(() => {
-			res.status(500).send({
-				message: 'server error',
-			});
-		});
+		}
+	});
 });
 
 // First check user and then create
