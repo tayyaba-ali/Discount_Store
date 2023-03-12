@@ -1,17 +1,23 @@
 // import bodyParser from 'body-parsar';
+import cookieParser from 'cookie-parser';
 import cors from 'cors';
 import express from 'express';
 import mongoose from 'mongoose';
 import userRoutes from './controllers/user.mjs';
 
 // Constants
-const app = express();
 const port = process.env.PORT || 4000;
 const mongodbURL =
 	process.env.PORT || 'mongodb+srv://admin:admin104339@cluster0.vtj0zau.mongodb.net/users?retryWrites=true&w=majority';
 
-app.use(express.json());
-app.use(cors());
+const app = express();
+app.use(express.json()); // parsing body
+app.use(cookieParser()); // parsing cookies
+app.use(
+	cors({
+		credentials: true,
+	}),
+);
 
 // app.get('/', (req, res) => {
 // 	console.log('lggae hit');
@@ -19,6 +25,7 @@ app.use(cors());
 // });
 
 app.use('/users', userRoutes);
+app.use('/product', userRoutes);
 
 // app.post('/signup', (req, res) => {
 // 	let body = req.body;
