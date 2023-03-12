@@ -8,7 +8,7 @@ export default function SayalaniWelfare() {
 				<div className='row mt-4 '>
 					<div className='col-12 text-center '>
 						<h2 className='main-heading lh-base content'>SAYLANI WELFARE</h2>
-						<h6 className='sub-heading blue'>ONLINE DISCOUNT STORE</h6>
+						<h6 className='sub-heading blue'>ONLINE MARKET PLACE</h6>
 					</div>
 				</div>
 			</div>

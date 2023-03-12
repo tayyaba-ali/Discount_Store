@@ -1,7 +1,7 @@
 import EmailIcon from '@mui/icons-material/Email';
 import Visibility from '@mui/icons-material/Visibility';
 import VisibilityOff from '@mui/icons-material/VisibilityOff';
-import { CssBaseline } from '@mui/material';
+import { CssBaseline, FormControlLabel } from '@mui/material';
 import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
 import Container from '@mui/material/Container';
@@ -12,29 +12,20 @@ import Input from '@mui/material/Input';
 import InputAdornment from '@mui/material/InputAdornment';
 import InputLabel from '@mui/material/InputLabel';
 import Link from '@mui/material/Link';
+import Radio from '@mui/material/Radio';
+import RadioGroup from '@mui/material/RadioGroup';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import axios from 'axios';
 import * as React from 'react';
+import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import SayalaniWelfare from '../SaylaniWelfare/SayalaniWelfare';
-
-// import { GlobalContext } from '../../context';
-
-// function Copyright(props) {
-// 	return (
-// 		<Typography variant='body2' color='text.secondary' align='center' {...props}>
-// 			{'Copyright © '}
-// 			<Link color='inherit' href='https://mui.com/'>
-// 				sysBorg
-// 			</Link>{' '}
-// 			{new Date().getFullYear()}
-// 			{'.'}
-// 		</Typography>
-// 	);
-// }
 
 const theme = createTheme();
 
 export default function SignIn() {
+	const [selectedValue, setSelectedValue] = useState('');
+	const navigate = useNavigate();
 	const [showPassword, setShowPassword] = React.useState(false);
 
 	const handleClickShowPassword = () => setShowPassword((show) => !show);
@@ -50,6 +41,7 @@ export default function SignIn() {
 		console.log({
 			email: data.get('email'),
 			password: data.get('password'),
+			type: data.get('value'),
 		});
 
 		let baseUrl = 'http://localhost:4000';
@@ -59,12 +51,14 @@ export default function SignIn() {
 				{
 					email: data.get('email'),
 					password: data.get('password'),
+					// type: data.get('value'),
 				},
 				// {
 				// 	withCredentials: true,
 				// },
 			);
 			console.log('response: ', response.data);
+			navigate('/profile');
 
 			// dispatch({
 			// 	type: 'USER_LOGIN',
@@ -111,6 +105,7 @@ export default function SignIn() {
 							autoComplete='current-password'
 							variant='standard'
 						/> */}
+
 						<FormControl sx={{ m: 1, width: '40ch' }} variant='standard' required>
 							<InputLabel htmlFor='standard-adornment-password'>Password</InputLabel>
 							<Input
@@ -128,6 +123,16 @@ export default function SignIn() {
 								}
 							/>
 						</FormControl>
+						<FormControl>
+							<RadioGroup
+								name='gender'
+								value={selectedValue}
+								onChange={(event) => setSelectedValue(event.target.value)}>
+								<FormControlLabel value='male' control={<Radio />} label='Male' />
+								<FormControlLabel value='female' control={<Radio />} label='Female' />
+								<FormControlLabel value='other' control={<Radio />} label='Other' />
+							</RadioGroup>
+						</FormControl>
 						<Grid container>
 							<Button type='submit' color='success' fullWidth variant='contained' sx={{ mt: 3, mb: 2 }}>
 								Sign In
@@ -141,6 +146,7 @@ export default function SignIn() {
 						</Grid>
 					</Box>
 				</Box>
+
 				{/* <Copyright sx={{ mt: 8, mb: 4 }} /> */}
 			</Container>
 		</ThemeProvider>
