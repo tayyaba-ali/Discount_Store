@@ -1,17 +1,18 @@
 import React from 'react';
+import { ThemeProvider } from 'react-bootstrap';
 import ReactDOM from 'react-dom/client';
+import { CartProvider } from 'react-use-cart';
 import App from './App';
-import ContextProvider from './Context/context';
 import './index.css';
 import reportWebVitals from './reportWebVitals';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
-	<React.StrictMode>
-		<ContextProvider>
+	<ThemeProvider>
+		<CartProvider>
 			<App />
-		</ContextProvider>
-	</React.StrictMode>,
+		</CartProvider>
+	</ThemeProvider>,
 );
 
 // If you want to start measuring performance in your app, pass a function

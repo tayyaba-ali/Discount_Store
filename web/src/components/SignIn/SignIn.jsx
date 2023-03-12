@@ -58,7 +58,7 @@ export default function SignIn() {
 				// },
 			);
 			console.log('response: ', response.data);
-			navigate('/profile');
+			navigate('/products');
 
 			// dispatch({
 			// 	type: 'USER_LOGIN',
